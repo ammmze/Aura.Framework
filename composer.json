@@ -1,29 +1,36 @@
 {
     "name": "Aura/Framework",
     "type": "library",
-    "description": "The Aura Framework package, when combined with a system skeleton, provides a full-stack framework built from Aura component packages.",
+    "description": "The Aura Framework package, when combined with a system skeleton, provides a full-stack framework built from Aura components.",
     "keywords": [
         "framework"
     ],
     "homepage": "http://auraphp.github.com/Aura.Framework",
-    "version": "1.0.0-dev",
+    "version": "1.0.0-beta2",
+    "time": "2012-02-13",
     "license": "BSD",
     "authors": [
         {
-            "name": "Aura Contributors",
+            "name": "Aura.Framework Contributors",
             "homepage": "https://github.com/auraphp/Aura.Framework/contributors"
+        },
+        {
+            "name": "Paul M. Jones",
+            "email": "pmjones88@gmail.com",
+            "homepage": "http://paul-m-jones.com"
         }
     ],
     "require": {
-        "php"               : ">=5.4.0",
-        "Aura/Autoload"     : ">=1.0.0beta1",
-        "Aura/Cli"          : ">=1.0.0beta1",
-        "Aura/Di"           : ">=1.0.0beta1",
-        "Aura/Http"         : ">=1.0.0beta1",
-        "Aura/Marshal"      : ">=1.0.0beta1",
-        "Aura/Router"       : ">=1.0.0beta1",
-        "Aura/Signal"       : ">=1.0.0beta1",
-        "Aura/View"         : ">=1.0.0beta1",
-        "Aura/Web"          : ">=1.0.0beta1"
+        "php": ">=5.4.0",
+        "Aura/Autoload": ">=1.0.0beta1",
+        "Aura/Cli": ">=1.0.0beta1",
+        "Aura/Di": ">=1.0.0beta1",
+        "Aura/Http": ">=1.0.0beta1",
+        "Aura/Marshal": ">=1.0.0beta1",
+        "Aura/Router": ">=1.0.0beta1",
+        "Aura/Signal": ">=1.0.0beta1",
+        "Aura/Sql": ">=1.0.0beta1",
+        "Aura/View": ">=1.0.0beta1",
+        "Aura/Web": ">=1.0.0beta1"
     }
 }
