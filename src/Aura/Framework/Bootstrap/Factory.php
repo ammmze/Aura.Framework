@@ -148,9 +148,6 @@ class Factory
 
         // read system config files
         $this->readSystemConfig($system, $read, $mode);
-        if ($mode != 'default') {
-            $this->readSystemConfig($system, $read, $mode);
-        }
 
         // lock the container
         $di->lock();
@@ -196,10 +193,8 @@ class Factory
      */
     public function readSystemConfig(System $system, callable $read, $mode)
     {
-        $file = $system->getConfigPath("{$mode}.php");
-        if (is_readable($file)) {
-            $read($file);
-        }
+        $config_path = $system->getConfigPath();
+        $this->readConfigSet($read, $mode, $config_path);
     }
 
     /**
@@ -226,27 +221,43 @@ class Factory
                 continue;
             }
 
-            // load its default config file, if any
-            $package_file = $package_path . DIRECTORY_SEPARATOR
+            $config_path = $package_path . DIRECTORY_SEPARATOR
                           . $package_name . DIRECTORY_SEPARATOR
-                          . 'config' . DIRECTORY_SEPARATOR
-                          . 'default.php';
+                          . 'config';
 
-            if (is_readable($package_file)) {
-                $read($package_file);
-            }
+            $this->readConfigSet($read, $mode, $config_path);
+        }
+    }
 
-            // load its config-mode-specific file, if any
-            if ($mode == 'default') {
-                continue;
-            }
+    /**
+     * 
+     * Reads a set of config files, starting with a default, the mode, then local
+     * 
+     * @param callable $read A callable to read configs in a limited scope.
+     * 
+     * @param string $mode The config mode.
+     * 
+     * @param string $path The config path.
+     * 
+     * @return void
+     * 
+     */
+    protected function readConfigSet(callable $read, $mode, $path)
+    {
+        // Default config file
+        $files = [$path . DIRECTORY_SEPARATOR . 'default.php'];
 
-            $package_file = $package_path . DIRECTORY_SEPARATOR
-                            . 'config' . DIRECTORY_SEPARATOR
-                            . "{$mode}.php";
+        // Mode specific config (if other than default)
+        if ($mode != 'default') {
+            $files[] = $path . DIRECTORY_SEPARATOR . "{$mode}.php";
+        }
 
-            if (is_readable($package_file)) {
-                $read($package_file);
+        // Local config file
+        $files[] = $path . DIRECTORY_SEPARATOR . 'local.php';
+
+        foreach ($files as $file) {
+            if (is_readable($file)) {
+                $read($file);
             }
         }
     }
