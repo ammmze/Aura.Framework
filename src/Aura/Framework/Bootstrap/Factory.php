@@ -242,7 +242,7 @@ class Factory
      * @return void
      * 
      */
-    protected function readConfigSet(callable $read, $mode, $path)
+    public function readConfigSet(callable $read, $mode, $path)
     {
         // Default config file
         $files = [$path . DIRECTORY_SEPARATOR . 'default.php'];
